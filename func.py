@@ -26,262 +26,54 @@ tt = tweepy.Client(
 
 # ## Defining Functions
 
-now = dt.now()
+import random
 
-#- get_date()
-def get_date(year=None, month=None, day=None, now=now, as_str=True):
-    """Returns string with the actual month and year, or especified date.
-  Used in request url.
+# Function to create a random prompt for tweet generation
+def generate_prompt() -> str:
+    # Example of creating a random prompt for generating tech, inspiration, personal development, or quirky content
+    categories = ['tech', 'inspiration', 'personal development', 'quirky', 'funny']
+    category = random.choice(categories)
 
-  in: get_month()
-  out: <ACTUAL_YEAR>/<ACTUAL_MONTH>/
+    if category == 'tech':
+        options = [
+            "Write a tweet about the latest technology trends in AI.",
+            "What is the most exciting thing happening in tech today?",
+            "Share an insight about the future of AI that will blow people's minds."
+        ]
+        return random.choice(options)
 
-  in: get_month(year = 2010, month = 03)
-  out: 2010/marco"""
+    elif category == 'inspiration':
+        options = [
+            "Write an inspirational tweet to kickstart someone's day.",
+            "Share a motivational thought to help someone overcome their challenges.",
+            "Give a quick pep talk to remind people they can achieve anything."
+        ]
+        return random.choice(options)
 
-    if year == None:
-        year_n = now.year
+    elif category == 'personal development':
+        options = [
+            "Write a tweet about how personal growth is a journey, not a destination.",
+            "Share an idea for improving one small habit today.",
+            "Give a tip on how to break free from a comfort zone."
+        ]
+        return random.choice(options)
+
+    elif category == 'quirky':
+        options = [
+            "Write a quirky tweet about the wonders of coffee and its magical powers.",
+            "Share a fun fact about the weirdest tech gadget you've seen recently.",
+            "Make a funny observation about everyday tech struggles."
+        ]
+        return random.choice(options)
+
+    elif category == 'funny':
+        options = [
+            "Write a funny tweet about the daily struggles of being a techie.",
+            "Share a light-hearted joke about productivity and procrastination.",
+            "Write a witty tweet about how technology is taking over, one app at a time."
+        ]
+        return random.choice(options)
+
     else:
-        year_n = year
+        return "Write a tweet about overcoming challenges with a dash of humor."
 
-    if month == None:
-        month_n = now.month
-    else:
-        month_n = month
-
-    day_n = now.day
-
-    dt_month = dict(
-        zip(range(1, 13), [
-            'janeiro', 'fevereiro', 'marco', 'abril', 'maio', 'junho', 'julho',
-            'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
-        ]))
-
-    if as_str == True:
-        str_date = '{}/{}'.format(year_n, dt_month[month_n])
-    else:
-        str_date = [year_n, month_n, day_n]
-
-    return str_date
-
-
-#- create_tree()
-def create_tree(year=None, month=None):
-
-    # sets month and year for request ()
-    str_date = get_date(year, month)
-
-    # Scrap's Resquest
-    url_r = 'https://www.datascomemorativas.me/{}'.format(str_date)
-    with requests.get(url_r) as r:
-        #print('DEBUG - status code: ',r.status_code)
-        r.encoding = 'UTF-8'
-        text = r.text  # string
-        #content = r.content # bytes
-
-    # generates html tree from html string
-    from lxml import html
-    tree = html.fromstring(text)
-    return tree
-
-
-#- create_grid()
-def create_grid(year=None, month=None, full_grid=False):
-
-    # today's date
-    today = get_date(as_str=False)
-
-    if year == None:
-        year = today[0]
-
-    month_n = today[1] if month == None else month
-
-    html_tree = create_tree(year, month)
-
-    x = list(range(1, 7))  # week of the month (1 = first week)
-    y = list(range(1, 8))  # day of the week (1 = sunday, 7 = saturday)
-    z = list(range(
-        1, 10))  # 9 rows per day (row1: icecream day, row2: youscream day)
-
-    # Creates Grid
-    from itertools import product
-    l = list(product(x, y, z))  # Vectorial product of lists
-
-    # Sets up grid loop
-    content = None
-    date_list = []
-
-    # defines year
-    year_xpath = '/html/body/section/div/header/div[1]/span[2]'
-    year = int(html_tree.xpath(year_xpath)[0].text_content())
-
-    # defines month
-    month_xpath = '/html/body/section/div/header/div[1]/span[1]'
-    month = html_tree.xpath(month_xpath)[0].text_content()
-
-    # Searchs html-tree using the grid
-    for x in range(len(l)):
-        a, b, c = l[x][0], l[x][1], l[x][2]
-        xpath_ref = [a, b, c]
-        # If a month starts on monday (week day 2), then the Sunday (day =1) returns Day = None
-        try:
-            #Defines day
-            day_xpath = '/html/body/section/div/div/table/tbody/tr[{0}]/td[{1}]/div[1]/span[1]'.format(
-                a, b)
-            day = html_tree.xpath(day_xpath)[0].text_content()
-        except:
-            day = 0
-
-
-
-        try:
-            content_xpath = '/html/body/section/div/div/table/tbody/tr[{0}]/td[{1}]/ul/li[{2}]/span'.format(
-                a, b, c)
-            content = html_tree.xpath(content_xpath)[0].text_content()
-        except:
-            content = None
-
-        # Verifica se é um feriado!
-        if content == None:
-            try:
-                content_xpath = '/html/body/section/div/div/table/tbody/tr[{0}]/td[{1}]/ul/li[{2}]/a'.format(
-                a, b, c)
-                content = html_tree.xpath(content_xpath)[0].text_content()
-                feriado_str = 'feriado!⭐ '
-                content = feriado_str+content
-            except:
-                content = None           
-
-        date_list.append([year, month_n, int(day), content, str(xpath_ref)])
-
-        if full_grid == False:
-            date_list = [x for x in date_list if x[3] != None
-                         ]  # Filters grid: content != None. See *** bellow
-
-    return date_list
-
-
-#- todays_tt()
-def todays_tt():
-    today = get_date(as_str=False)
-    date_list = create_grid()
-    tt_list = [x for x in date_list if x[:3] == today]
-
-    return tt_list
-
-#- create_tree_feriado
-def create_tree_feriado(year=None, month=None, url = 'http://www.supercalendario.com.br/feriados/'):
-
-    # sets month and year for request ()
-    str_date = get_date(year, month)[:4]
-
-    # Scrap's Resquest
-    url_r = url+'{}'.format(str_date)
-    #print(url_r)
-    with requests.get(url_r) as r:
-        #print('DEBUG - status code: ',r.status_code)
-        r.encoding = 'UTF-8'
-        text = r.text  # string
-        #content = r.content # bytes
-
-    # generates html tree from html string
-    from lxml import html
-    tree = html.fromstring(text)
-    return tree
-
-#- get_list_feriado_futuro()
-def get_list_feriado_futuro(year = None, now = now):
-    
-    today = now.date()
-    
-    if year == None:
-        year = now.year
-    #print('feriados de ', year)
-    
-    url_feriado = 'http://www.supercalendario.com.br/feriados/'
-    tree = create_tree_feriado(year = year, url = url_feriado)
-
-    list_contents = [y.split(' - ') for y in [x.text_content() for x in tree.find_class('holidayDate')[1:]]]
-    list_feriado  = [f[0] for f in list_contents]
-    list_wd       = [f[1] for f in list_contents]
-    list_content  = [f[2] for f in list_contents]
-    
-    
-    from pandas import to_datetime
-    from dateutil.relativedelta import relativedelta
-
-    rd = (relativedelta(years = year) - relativedelta(years = 1900))  
-    list_feriado = [(to_datetime(f, format='%d/%m') + rd).date() for f in list_feriado]
-    list_distancia_feriado = [(d - today).days for d in list_feriado]
-    list_feriados_futuro = [x for x in list_distancia_feriado if x>0]
-    
-    if  len(list_feriados_futuro) == 0:
-        print('DEBUG: feriados de year+1')
-        return get_list_feriado_futuro(year = year+1)
-           
-    next_holiday_in_days = min(list_feriados_futuro)
-    next_holiday_idx = list_distancia_feriado.index(next_holiday_in_days)
-    
-    list_content = [list_feriado[next_holiday_idx], list_wd[next_holiday_idx], list_content[next_holiday_idx], next_holiday_in_days]
-    
-    return list_content
-
-#- get_content_feriado()
-def get_content_feriado(year = None, now = now):
-
-    list_content = get_list_feriado_futuro(year=year, now = now)
-    feriado  = list_content[0]
-    wd       = list_content[1]
-    content  = list_content[2]
-    
-    next_holiday_in_days = list_content[3]
-    
-    dt_month = dict(
-            zip(range(1, 13), [
-                'janeiro', 'fevereiro', 'marco', 'abril', 'maio', 'junho', 'julho',
-                'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
-            ]))
-
-    str_dt_feriado = feriado.strftime(f'%d de {dt_month[feriado.month]} de %Y')
-    str_content_feriado = f"\nFaltam {next_holiday_in_days} dias para o próximo feriado: O {content}!"
-    extra_feriado = "\nE se prepara pro feriadão que o {} cai numa {}!🌞😎".format(content, wd)
-
-    if wd in ["Segunda-feira","Sexta-feira"]:
-        str_content_feriado = str_content_feriado+extra_feriado
-    
-    #print(str_content_feriado)
-    return str_content_feriado
-
-#- format_post()
-def format_post():
-    ttt = todays_tt()
-    ttt_aux = list(set([x[3] for x in ttt]))
-    txt = str([x for x in ttt_aux]).strip('[]').replace("'", "")
-
-    if len(ttt_aux) > 1:
-        txt = txt.replace(',{}'.format(txt.split(',')[-1]),
-                          ' e{}'.format(txt.split(',')[-1]))
-        
-    # Carrega texto sobre o próximo feriado!   
-    str_feriados = get_content_feriado()
-
-    
-    # - Substitui texto específico
-    txt = txt.replace('Dia do Deficiente Físico','Dia da Pessoa com Deficência Física')
-    txt = txt.replace('Dia do índio','Dia dos Povos indígenas')
-    txt = txt.replace(' Dia ',' ')
-    txt = txt.replace('Hoje é ','Hoje é dia ')
-    
-    if txt == '':
-        return '\nHoje não temos datas comemorativas! 😥 ' + str_feriados
-    else:
-        return '\n\nHoje é {}.'.format(txt) + str_feriados
-
-
-#- post_date()
-def post_date():
-    text = format_post()
-    print(text)
-    r = tt.create_tweet(text=text)
-    print(r)
-    return
