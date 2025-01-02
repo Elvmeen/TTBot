@@ -17,16 +17,19 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 
 # Setting up Twitter API keys with tweepy.Client
 tt = tweepy.Client(
-    #Consumer Keys
-    consumer_key= os.getenv['CONSUMER_KEY'],
-    consumer_secret= os.getenv['CONSUMER_SECRET'],
+    # Consumer Keys
+    consumer_key= os.getenv('CONSUMER_KEY'),
+    consumer_secret= os.getenv('CONSUMER_SECRET'),
     # Access Token and Secret
-    access_token= os.getenv['ACCESS_TOKEN'],
-    access_token_secret= os.getenv['ACCESS_TOKEN_SECRET'])
+    access_token= os.getenv('ACCESS_TOKEN'),
+    access_token_secret= os.getenv('ACCESS_TOKEN_SECRET')
+)
 
+# Check for missing keys (optional, but good for debugging)
+if None in [openai.api_key, os.getenv('CONSUMER_KEY'), os.getenv('CONSUMER_SECRET'), 
+            os.getenv('ACCESS_TOKEN'), os.getenv('ACCESS_TOKEN_SECRET')]:
+    raise EnvironmentError("One or more required environment variables are missing!")
 
-
-import random
 
 # Function to create a random prompt for tweet generation
 def generate_prompt() -> str:
