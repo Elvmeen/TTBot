@@ -18,11 +18,11 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 # Setting up Twitter API keys with tweepy.Client
 tt = tweepy.Client(
     #Consumer Keys
-    consumer_key= os.environ['CONSUMER_KEY'],
-    consumer_secret= os.environ['CONSUMER_SECRET'],
+    consumer_key= os.getenv['CONSUMER_KEY'],
+    consumer_secret= os.getenv['CONSUMER_SECRET'],
     # Access Token and Secret
-    access_token= os.environ['ACCESS_TOKEN'],
-    access_token_secret= os.environ['ACCESS_TOKEN_SECRET'])
+    access_token= os.getenv['ACCESS_TOKEN'],
+    access_token_secret= os.getenv['ACCESS_TOKEN_SECRET'])
 
 
 
