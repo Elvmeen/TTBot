@@ -2,8 +2,9 @@ name: runs-ttbot
 
 on:
   schedule:
-  - cron: '0 13 * * *'
-  
+  - cron: '0 */30 * * *'  # Runs every 30 minutes past the hour
+  - cron: '30 * * * *'   # Runs every 30 minutes after the hour
+ 
   push:
     branches:
       - main
