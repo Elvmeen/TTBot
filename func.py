@@ -12,6 +12,10 @@ from datetime import datetime as dt
 
 # ## Auth
 
+# Setting up OpenAI API key
+openai.api_key = os.getenv('OPENAI_API_KEY')
+
+# Setting up Twitter API keys with tweepy.Client
 tt = tweepy.Client(
     #Consumer Keys
     consumer_key= os.environ['CONSUMER_KEY'],
