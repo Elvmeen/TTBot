@@ -52,30 +52,30 @@ def generate_prompt() -> str:
 
     elif category == 'personal development':
         options = [
-            "Write a tweet about how personal growth is a journey, not a destination.",
-            "Share an idea for improving one small habit today.",
-            "Give a tip on how to break free from a comfort zone."
+            "Stricly noting of the twitter text threshold, be natural, professional or very quircky Write a tweet about how personal growth is a journey, not a destination.",
+            "Stricly noting of the twitter text threshold, be natural, professional or very quircky Share an idea for improving one small habit today.",
+            "Stricly noting of the twitter text threshold, be natural, professional or very quircky Give a tip on how to break free from a comfort zone."
         ]
         return random.choice(options)
 
     elif category == 'quirky':
         options = [
-            "Write a quirky tweet about the wonders of coffee and its magical powers.",
-            "Share a fun fact about the weirdest tech gadget you've seen recently.",
-            "Make a funny observation about everyday tech struggles."
+            "Stricly noting of the twitter text threshold, be natural, professional or very quircky Write a quirky tweet about the wonders of coffee and its magical powers.",
+            "Stricly noting of the twitter text threshold, be natural, professional or very quircky Share a fun fact about the weirdest tech gadget you've seen recently.",
+            "Stricly noting of the twitter text threshold, be natural, professional or very quircky Make a funny observation about everyday tech struggles."
         ]
         return random.choice(options)
 
     elif category == 'funny':
         options = [
-            "Write a funny tweet about the daily struggles of being a techie.",
-            "Share a light-hearted joke about productivity and procrastination.",
-            "Write a witty tweet about how technology is taking over, one app at a time."
+            "Stricly noting of the twitter text threshold, be natural, professional or very quircky Write a funny tweet about the daily struggles of being a techie.",
+            "Stricly noting of the twitter text threshold, be natural, professional or very quircky Share a light-hearted joke about productivity and procrastination.",
+            "Stricly noting of the twitter text threshold, be natural, professional or very quircky Write a witty tweet about how technology is taking over, one app at a time."
         ]
         return random.choice(options)
 
     else:
-        return "Write a tweet about overcoming challenges with a dash of humor."
+        return "Stricly noting of the twitter text threshold, be natural, professional or very quircky Write a tweet about overcoming challenges with a dash of humor."
 
 
 
