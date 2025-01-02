@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Funções
-
 # ## Importing libs
 
 import os
 import requests
 import tweepy
+import random
+import openai
 from datetime import datetime as dt
 
 # ## Auth
@@ -24,7 +24,7 @@ tt = tweepy.Client(
     access_token= os.environ['ACCESS_TOKEN'],
     access_token_secret= os.environ['ACCESS_TOKEN_SECRET'])
 
-# ## Defining Functions
+
 
 import random
 
@@ -77,3 +77,24 @@ def generate_prompt() -> str:
     else:
         return "Write a tweet about overcoming challenges with a dash of humor."
 
+
+
+# Function to post the tweet using Twitter API
+def post_tweet(api_key: str, api_key_secret: str, access_token: str, access_token_secret: str, tweet: str):
+    # Authentication using tweepy.OAuth1UserHandler (OAuth 1.0a authentication)
+    auth = tweepy.OAuth1UserHandler(
+        consumer_key=api_key,
+        consumer_secret=api_key_secret,
+        access_token=access_token,
+        access_token_secret=access_token_secret
+    )
+    
+    # Create tweepy API object using authentication
+    tt = tweepy.API(auth)
+
+    try:
+        # Posting the tweet (the `update_status` method)
+        tt.update_status(tweet)
+        print("Tweet posted successfully!")
+    except tweepy.TweepError as e:
+        print(f"Error posting tweet: {e}")
