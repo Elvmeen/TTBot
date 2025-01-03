@@ -39,17 +39,17 @@ def generate_prompt() -> str:
 
     if category == 'tech':
         options = [
-            "Write a tweet about the latest technology trends in AI.",
-            "What is the most exciting thing happening in tech today?",
-            "Share an insight about the future of AI that will blow people's minds."
+            "Stricly noting of the twitter text threshold, be natural, professional or very quircky Write a tweet about the latest technology trends in AI.",
+            "Stricly noting of the twitter text threshold, be natural, professional or very quircky What is the most exciting thing happening in tech today?",
+            "Stricly noting of the twitter text threshold, be natural, professional or very quircky Share an insight about the future of AI that will blow people's minds."
         ]
         return random.choice(options)
 
     elif category == 'inspiration':
         options = [
-            "Write an inspirational tweet to kickstart someone's day.",
-            "Share a motivational thought to help someone overcome their challenges.",
-            "Give a quick pep talk to remind people they can achieve anything."
+            "Stricly noting of the twitter text threshold, be natural, professional or very quircky Write an inspirational tweet to kickstart someone's day.",
+            "Stricly noting of the twitter text threshold, be natural, professional or very quircky Share a motivational thought to help someone overcome their challenges.",
+            "Stricly noting of the twitter text threshold, be natural, professional or very quircky Give a quick pep talk to remind people they can achieve anything."
         ]
         return random.choice(options)
 
@@ -78,7 +78,7 @@ def generate_prompt() -> str:
         return random.choice(options)
 
     else:
-        return "less than 280 tweet characters Stricly noting of the twitter text threshold, be natural, professional or very quircky Write a tweet about overcoming challenges with a dash of humor."
+        return "In less than 280 tweet characters Stricly noting of the twitter text threshold, be natural, professional or very quircky Write a tweet about overcoming challenges with a dash of humor."
 
 # Function to generate tweet content using OpenAI's GPT
 def generate_tweet_from_openai(prompt: str) -> str:
