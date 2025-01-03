@@ -84,7 +84,11 @@ def generate_prompt() -> str:
 def generate_tweet_from_openai(prompt: str) -> str:
     try:
         # Requesting OpenAI to generate tweet content based on the generated prompt
-        response = openai.Completion.create(
+        response = openai.ChatCompletion.create(
+              messages=[
+                {"role": "system", "content": "You are a helpful assistant that generates tweets."},
+                {"role": "user", "content": prompt}
+            ],
             model="gpt-4o-mini",  # You can use any other model, like text-curie-001 or gpt-3.5-turbo
             prompt=prompt,
             max_tokens=280,  # Keeping the tweet under Twitter's character limit
