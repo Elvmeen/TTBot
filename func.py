@@ -18,7 +18,9 @@ load_dotenv()
 # ## Auth
 
 # Setting up OpenAI API key
-openai.api_key = os.getenv('OPENAI_API_KEY')
+# Initialize OpenAI client securely using environment variable
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))  # API key loaded from environment variable
+
 
 tt = tweepy.Client(
     #Consumer Keys
