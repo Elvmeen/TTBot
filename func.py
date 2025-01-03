@@ -98,7 +98,7 @@ def generate_tweet_from_openai(prompt: str) -> str:
         )
 
         # Extracting the text response from OpenAI
-        tweet_content = response.choices[0].text.strip()
+        tweet_content = completion.choices[0].text.strip()
         return tweet_content
 
     except Exception as e:
