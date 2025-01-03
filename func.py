@@ -78,8 +78,27 @@ def generate_prompt() -> str:
         return random.choice(options)
 
     else:
-        return "Stricly noting of the twitter text threshold, be natural, professional or very quircky Write a tweet about overcoming challenges with a dash of humor."
+        return "less than 280 tweet characters Stricly noting of the twitter text threshold, be natural, professional or very quircky Write a tweet about overcoming challenges with a dash of humor."
 
+# Function to generate tweet content using OpenAI's GPT
+def generate_tweet_from_openai(prompt: str) -> str:
+    try:
+        # Requesting OpenAI to generate tweet content based on the generated prompt
+        response = openai.Completion.create(
+            engine="text-davinci-003",  # You can use any other model, like text-curie-001 or gpt-3.5-turbo
+            prompt=prompt,
+            max_tokens=280,  # Keeping the tweet under Twitter's character limit
+            temperature=0.7  # Controls randomness in the output
+        )
+
+        # Extracting the text response from OpenAI
+        tweet_content = response.choices[0].text.strip()
+        return tweet_content
+
+    except Exception as e:
+        print(f"Error generating tweet with OpenAI: {e}")
+        return "Error generating tweet."
+        
 
 # Function to post the tweet using Twitter API
 def post_tweet(tweet: str):
