@@ -86,7 +86,7 @@ def generate_prompt() -> str:
 def generate_tweet_from_openai(prompt: str) -> str:
     try:
         # Requesting OpenAI to generate tweet content based on the generated prompt
-        response = openai.ChatCompletion.create(
+        completion = client.chat.completions.create(
               messages=[
                 {"role": "system", "content": "You are a helpful assistant that generates tweets."},
                 {"role": "user", "content": prompt}
