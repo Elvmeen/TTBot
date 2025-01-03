@@ -9,21 +9,25 @@ import tweepy
 import random
 import openai
 from datetime import datetime as dt
+from dotenv import load_dotenv
+
+
+# Load environment variables from .env file
+load_dotenv()
 
 # ## Auth
 
 # Setting up OpenAI API key
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
-# Setting up Twitter API keys with tweepy.Client
 tt = tweepy.Client(
-    # Consumer Keys
-    consumer_key= os.getenv('CONSUMER_KEY'),
-    consumer_secret= os.getenv('CONSUMER_SECRET'),
+    #Consumer Keys
+    consumer_key= os.environ['CONSUMER_KEY'],
+    consumer_secret= os.environ['CONSUMER_SECRET'],
     # Access Token and Secret
-    access_token= os.getenv('ACCESS_TOKEN'),
-    access_token_secret= os.getenv('ACCESS_TOKEN_SECRET')
-)
+    access_token= os.environ['ACCESS_TOKEN'],
+    access_token_secret= os.environ['ACCESS_TOKEN_SECRET'])
+
 
 
 
@@ -77,23 +81,11 @@ def generate_prompt() -> str:
         return "Stricly noting of the twitter text threshold, be natural, professional or very quircky Write a tweet about overcoming challenges with a dash of humor."
 
 
-
 # Function to post the tweet using Twitter API
-def post_tweet(api_key: str, api_key_secret: str, access_token: str, access_token_secret: str, tweet: str):
-    # Authentication using tweepy.OAuth1UserHandler (OAuth 1.0a authentication)
-    auth = tweepy.OAuth1UserHandler(
-        consumer_key=api_key,
-        consumer_secret=api_key_secret,
-        access_token=access_token,
-        access_token_secret=access_token_secret
-    )
-    
-    # Create tweepy API object using authentication
-    tt = tweepy.API(auth)
-
+def post_tweet(tweet: str):
     try:
-        # Posting the tweet (the `update_status` method)
-        tt.update_status(tweet)
+        # Posting the tweet using tweepy.Client's create_tweet method
+        tt.create_tweet(text=tweet)  # 'text' is required for the new create_tweet method
         print("Tweet posted successfully!")
-    except tweepy.TweepError as e:
+    except tweepy.errors.TweepyError as e:  # Catch errors using the new exception class
         print(f"Error posting tweet: {e}")
