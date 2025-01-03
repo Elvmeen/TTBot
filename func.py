@@ -85,7 +85,7 @@ def generate_tweet_from_openai(prompt: str) -> str:
     try:
         # Requesting OpenAI to generate tweet content based on the generated prompt
         response = openai.Completion.create(
-            engine="text-davinci-003",  # You can use any other model, like text-curie-001 or gpt-3.5-turbo
+            model="gpt-4o-mini",  # You can use any other model, like text-curie-001 or gpt-3.5-turbo
             prompt=prompt,
             max_tokens=280,  # Keeping the tweet under Twitter's character limit
             temperature=0.7  # Controls randomness in the output
