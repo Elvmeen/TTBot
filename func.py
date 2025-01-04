@@ -41,44 +41,54 @@ def generate_prompt() -> str:
 
     if category == 'tech':
         options = [
-           "Stricly noting of the twitter text threshold,Write a tweet about the latest technology trends in AI.",
-           "Stricly noting of the twitter text threshold, What is the most exciting thing happening in tech today?",
-           "Stricly noting of the twitter text threshold, Share an insight about the future of AI that will blow people's minds."
+            "What's the most underrated programming language today, and why?",
+            "AI is advancing rapidly, but are we prepared for the ethical challenges it brings?",
+            "Write a serious tweet about the importance of cybersecurity in an increasingly connected world.",
+            "If you had to explain AI to someone in one sentence, what would you say?",
+            "Why do some developers still prefer older languages over the new, flashy ones?",
+            "Write a thought-provoking tweet on the future of machine learning in healthcare."
         ]
         return random.choice(options)
 
     elif category == 'inspiration':
         options = [
-            "Stricly noting of the twitter text threshold, be natural,  Write an inspirational tweet to kickstart someone's day.",
-            "Stricly noting of the twitter text threshold, be natural, Share a motivational thought to help someone overcome their challenges.",
-            "Stricly noting of the twitter text threshold, be natural,  Give a quick pep talk to remind people they can achieve anything."
+            "Every great tech innovation started with a single idea. What's holding you back from starting yours?",
+            "When you hit a roadblock in coding, remember that every bug is a lesson in disguise.",
+            "Innovation thrives in discomfort. Step out of your comfort zone today.",
+            "Progress in tech is relentless, but so is your potential. Keep pushing the boundaries.",
+            "Think of the tech giants today. They all started small. What’s stopping you from starting?"
         ]
         return random.choice(options)
 
     elif category == 'personal development':
         options = [
-            "Stricly noting of the twitter text threshold, be natural,  Write a tweet about how personal growth is a journey, not a destination.",
-            "Stricly noting of the twitter text threshold, be natural,  Give a tip on how to break free from a comfort zone."
+            "In tech, skills are your currency. What new skill will you invest in today?",
+            "Personal growth in programming isn't just about new languages; it's about mastering the mindset.",
+            "Discipline in learning to code can reshape your life. What's one thing you'll commit to learning today?",
+            "Tech changes, but the ability to adapt remains constant. How flexible is your learning approach?",
+            "Breaking out of your comfort zone isn't easy, but it's where the real growth happens. When was the last time you challenged yourself?"
         ]
         return random.choice(options)
 
     elif category == 'quirky':
         options = [
-            "Stricly noting of the twitter text threshold, be quircky Write a quirky tweet about the wonders of coffee and its magical powers.",
-            "Stricly noting of the twitter text threshold, Make a funny observation about everyday tech struggles."
+            "Why do programmers always mix up Halloween and Christmas? Because Oct 31 == Dec 25!",
+            "If your code works on the first try, did you really learn anything?",
+            "Ever notice how debugging is like being a detective in a crime movie where you are also the murderer?",
+            "Code is like humor. When you have to explain it, it’s bad."
         ]
         return random.choice(options)
 
     elif category == 'funny':
         options = [
-            "Stricly noting of the twitter text threshold,  Write a funny tweet about the daily struggles of being a techie.",
-            "Stricly noting of the twitter text threshold,  Share a light-hearted joke about productivity and procrastination.",
-            "Stricly noting of the twitter text threshold,  Write a witty tweet about how technology is taking over, one app at a time."
+            "Why do Java developers wear glasses? Because they don't see sharp.",
+            "I have a joke about recursion, but I’ll tell it after I explain recursion.",
+            "There are 10 kinds of people in the world: those who understand binary, and those who don’t."
         ]
         return random.choice(options)
 
     else:
-        return "In less than 280 tweet characters Stricly noting of the twitter text threshold, be natural Write a tweet about overcoming challenges with a dash of humor."
+        return "In less than 280 characters, write a tweet about overcoming challenges with a strong, motivational tone."
 
 # Function to generate tweet content using OpenAI's GPT
 def generate_tweet_from_openai(prompt: str) -> str:
