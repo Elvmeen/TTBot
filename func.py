@@ -41,7 +41,9 @@ def generate_prompt() -> str:
 
     if category == 'tech':
         options = [
-           
+           "Stricly noting of the twitter text threshold,Write a tweet about the latest technology trends in AI.",
+           "Stricly noting of the twitter text threshold, What is the most exciting thing happening in tech today?",
+           "Stricly noting of the twitter text threshold, Share an insight about the future of AI that will blow people's minds."
         ]
         return random.choice(options)
 
