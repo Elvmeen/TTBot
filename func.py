@@ -46,14 +46,14 @@ def generate_prompt() -> str:
             "Create a tweet discussing the importance of some subjecttive areas programming like quant finance or orther sectios in today's digital age.",
             "Share a tip for optimizing code performance that every developer should know.",
             "Write a tweet about the evolution of programming languages and how it’s changed the way we code.",
-            "Pose a radom question about the cybersecurity/programming that encourages engagement."
+            "Pose a radom question about the cybersecurity/programming that encourages engagement as a tweet."
         ]
         return random.choice(options)
 
     elif category == 'personal_dev':
         options = [
             "Write a motivational tweet where I reflect on a moment I overcame self-doubt and how it transformed me.",
-            "Create a tweet where I share a personal revelation about the importance of embracing failure as a stepping stone to success",
+            "Create a tweet where I share a personal revelation about the importance of embracing failure as a stepping stone to success, in a very strong tone",
             "Generate an inspiring tweet where I talk about my journey of breaking free from my comfort zone and the growth that followed",
             "If your code works on the first try, did you really learn anything?",
         ]
@@ -61,14 +61,14 @@ def generate_prompt() -> str:
 
     elif category == 'humour':
         options = [
-            "Write a short, emotionally charged question that sparks deep reflection.",
-            "Craft a greeting that’s both humorous and slightly provocative",
-            "Create a one-liner that blends humor with a touch of sexual explicity.",
+            "Write a short, very emotionally charged question that sparks deep reflection.",
+            "Craft a greeting that’s both humorous and strongly provocative",
+            "Create a one-liner that blends intense humor and should be flirty and witty related to women",
         ]
         return random.choice(options)
 
     else:
-        return "In less than 280 characters, write a tweet about overcoming challenges with a strong, motivational tone."
+        return "In less than 280 characters, write a tweet about overcoming challenges with a extreamly strong, motivational tone."
 
 # Function to generate tweet content using OpenAI's GPT
 def generate_tweet_from_openai(prompt: str) -> str:
