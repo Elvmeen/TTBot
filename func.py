@@ -72,8 +72,8 @@ def generate_prompt() -> str:
 
     elif category == 'quirky':
         options = [
-            "Why do programmers always mix up Halloween and Christmas? Because Oct 31 == Dec 25!",
-            "If your code works on the first try, did you really learn anything?",
+            "Ask in a simple short, Why do programmers always mix up Halloween and Christmas? Because Oct 31 == Dec 25!",
+            "Ask in a simple shortIf your code works on the first try, did you really learn anything?",
             "Ever notice how debugging is like being a detective in a crime movie where you are also the murderer?",
             "Code is like humor. When you have to explain it, it’s bad."
         ]
@@ -81,9 +81,9 @@ def generate_prompt() -> str:
 
     elif category == 'funny':
         options = [
-            "Why do Java developers wear glasses? Because they don't see sharp.",
+            "Ask in a simple short tweet Why do Java developers wear glasses? Because they don't see sharp.",
             "I have a joke about recursion, but I’ll tell it after I explain recursion.",
-            "There are 10 kinds of people in the world: those who understand binary, and those who don’t."
+            "Ask in a simple short There are 10 kinds of people in the world: those who understand binary, and those who don’t."
         ]
         return random.choice(options)
 
