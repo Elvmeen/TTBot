@@ -32,58 +32,38 @@ tt = tweepy.Client(
 
 
 
+import random
 
 # Function to create a random prompt for tweet generation
 def generate_prompt() -> str:
-    # Example of creating a random prompt for generating tech, inspiration, personal development, or quirky content
-    categories = ['tech', 'inspiration', 'personal development', 'quirky', 'funny']
+    # Categories for generating prompts
+    categories = ['tech', 'personal_dev', 'humour']
     category = random.choice(categories)
 
     if category == 'tech':
         options = [
-            "What's the most underrated programming language today, and why?",
-            "AI is advancing rapidly, but are we prepared for the ethical challenges it brings?",
-            "Write a serious tweet about the importance of cybersecurity in an increasingly connected world.",
-            "If you had to explain AI to someone in one sentence, what would you say?",
-            "Why do some developers still prefer older languages over the new, flashy ones?",
-            "Write a thought-provoking tweet on the future of machine learning in healthcare."
+            "Write a first-person tweet sharing a hard-earned lesson from a recent coding challenge.",
+            "Create a tweet discussing the importance of some subjecttive areas programming like quant finance or orther sectios in today's digital age.",
+            "Share a tip for optimizing code performance that every developer should know.",
+            "Write a tweet about the evolution of programming languages and how it’s changed the way we code.",
+            "Pose a radom question about the cybersecurity/programming that encourages engagement."
         ]
         return random.choice(options)
 
-    elif category == 'inspiration':
+    elif category == 'personal_dev':
         options = [
-            "Every great tech innovation started with a single idea. What's holding you back from starting yours?",
-            "When you hit a roadblock in coding, remember that every bug is a lesson in disguise.",
-            "Innovation thrives in discomfort. Step out of your comfort zone today.",
-            "Progress in tech is relentless, but so is your potential. Keep pushing the boundaries.",
-            "Think of the tech giants today. They all started small. What’s stopping you from starting?"
+            "Write a motivational tweet where I reflect on a moment I overcame self-doubt and how it transformed me.",
+            "Create a tweet where I share a personal revelation about the importance of embracing failure as a stepping stone to success",
+            "Generate an inspiring tweet where I talk about my journey of breaking free from my comfort zone and the growth that followed",
+            "If your code works on the first try, did you really learn anything?",
         ]
         return random.choice(options)
 
-    elif category == 'personal development':
+    elif category == 'humour':
         options = [
-            "In tech, skills are your currency. What new skill will you invest in today?",
-            "Personal growth in programming isn't just about new languages; it's about mastering the mindset.",
-            "Discipline in learning to code can reshape your life. What's one thing you'll commit to learning today?",
-            "Tech changes, but the ability to adapt remains constant. How flexible is your learning approach?",
-            "Breaking out of your comfort zone isn't easy, but it's where the real growth happens. When was the last time you challenged yourself?"
-        ]
-        return random.choice(options)
-
-    elif category == 'quirky':
-        options = [
-            "Ask in a simple short, Why do programmers always mix up Halloween and Christmas? Because Oct 31 == Dec 25!",
-            "Ask in a simple shortIf your code works on the first try, did you really learn anything?",
-            "Ever notice how debugging is like being a detective in a crime movie where you are also the murderer?",
-            "Code is like humor. When you have to explain it, it’s bad."
-        ]
-        return random.choice(options)
-
-    elif category == 'funny':
-        options = [
-            "Ask in a simple short tweet Why do Java developers wear glasses? Because they don't see sharp.",
-            "I have a joke about recursion, but I’ll tell it after I explain recursion.",
-            "Ask in a simple short There are 10 kinds of people in the world: those who understand binary, and those who don’t."
+            "Write a short, emotionally charged question that sparks deep reflection.",
+            "Craft a greeting that’s both humorous and slightly provocative",
+            "Create a one-liner that blends humor with a touch of sexual explicity.",
         ]
         return random.choice(options)
 
