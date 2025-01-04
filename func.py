@@ -7,17 +7,19 @@ import os
 import requests
 import tweepy
 import random
+import time
 import openai
-from datetime import datetime as dt
 from dotenv import load_dotenv
 from openai import OpenAI
+from datetime import datetime
+
 
 # Load environment variables from .env file
 load_dotenv()
 
-# ## Auth
+# ## 
 
-# Setting up OpenAI API key
+# Setting up OpenAI API key/Auth
 # Initialize OpenAI client securely using environment variable
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))  # API key loaded from environment variable
 
@@ -94,11 +96,38 @@ def generate_tweet_from_openai(prompt: str) -> str:
         return "Error generating tweet."
         
 
+
 # Function to post the tweet using Twitter API
 def post_tweet(tweet: str):
     try:
         # Posting the tweet using tweepy.Client's create_tweet method
         tt.create_tweet(text=tweet)  # 'text' is required for the new create_tweet method
         print("Tweet posted successfully!")
-    except tweepy.errors.TweepyError as e:  # Catch errors using the new exception class
-        print(f"Error posting tweet: {e}")
+    except tweepy.errors.TooManyRequests as e:  # Catch rate limit error specifically
+        # Calculate the wait time based on the rate limit reset
+        rate_limit_reset = datetime.fromtimestamp(e.rate_limit_reset)
+        wait_time = rate_limit_reset - datetime.now()
+        error_message = f"{datetime.now()}: Rate limit reached. Waiting until {rate_limit_reset}. Time remaining: {wait_time}"
+        print("Rate limit reached. Check your logs for the wait time.")  # Log the message, don't post to Twitter
+        # Optionally, you can print out the error message or log it somewhere
+        print(f"Error details (not posted to Twitter): {error_message}")
+        # You can remove the following line if you don't want to wait
+        # time.sleep(wait_time.total_seconds())
+    except tweepy.errors.TweepyError as e:  # Catch other Tweepy errors
+        general_error_message = f"Error posting tweet: {e}"
+        print("An error occurred. Check your logs for more details.")  # Log the error, don't post to Twitter
+        # Optionally, you can print out the general error message or log it somewhere
+        print(f"General error details (not posted to Twitter): {general_error_message}")
+
+
+
+
+                               
+## Function to post the tweet using Twitter API
+#def post_tweet(tweet: str):
+#    try:
+#        # Posting the tweet using tweepy.Client's create_tweet method
+#        tt.create_tweet(text=tweet)  # 'text' is required for the new create_tweet method
+#        print("Tweet posted successfully!")
+#    except tweepy.errors.TweepyError as e:  # Catch errors using the new exception class
+#        print(f"Error posting tweet: {e}")
