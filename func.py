@@ -97,6 +97,8 @@ def generate_tweet_from_openai(prompt: str) -> str:
         
 
 
+
+
 # Function to post the tweet using Twitter API
 def post_tweet(tweet: str):
     try:
@@ -104,15 +106,16 @@ def post_tweet(tweet: str):
         tt.create_tweet(text=tweet)  # 'text' is required for the new create_tweet method
         print("Tweet posted successfully!")
     except tweepy.errors.TooManyRequests as e:  # Catch rate limit error specifically
-        # Calculate the wait time based on the rate limit reset
-        rate_limit_reset = datetime.fromtimestamp(e.rate_limit_reset)
-        wait_time = rate_limit_reset - datetime.now()
-        error_message = f"{datetime.now()}: Rate limit reached. Waiting until {rate_limit_reset}. Time remaining: {wait_time}"
-        print("Rate limit reached. Check your logs for the wait time.")  # Log the message, don't post to Twitter
-        # Optionally, you can print out the error message or log it somewhere
-        print(f"Error details (not posted to Twitter): {error_message}")
-        # You can remove the following line if you don't want to wait
-        # time.sleep(wait_time.total_seconds())
+        # Check if the exception contains the response and extract rate limit reset
+        if e.response:
+            rate_limit_reset = datetime.fromtimestamp(e.response.headers['x-rate-limit-reset'])
+            wait_time = rate_limit_reset - datetime.now()
+            error_message = f"{datetime.now()}: Rate limit reached. Waiting until {rate_limit_reset}. Time remaining: {wait_time}"
+            print("Rate limit reached. Check your logs for the wait time.")  # Log the message, don't post to Twitter
+            # Optionally, you can print out the error message or log it somewhere
+            print(f"Error details (not posted to Twitter): {error_message}")
+        else:
+            print("Rate limit information not available in the response.")
     except tweepy.errors.TweepyError as e:  # Catch other Tweepy errors
         general_error_message = f"Error posting tweet: {e}"
         print("An error occurred. Check your logs for more details.")  # Log the error, don't post to Twitter
