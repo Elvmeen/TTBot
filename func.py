@@ -65,12 +65,12 @@ def generate_prompt() -> str:
         options = [
             "Write a short, very emotionally charged question that sparks deep reflection.",
             "Craft a greeting that’s both humorous and strongly provocative",
-            "Create a one-liner that blends intense humor and should be flirty and witty related to women",
+            "Create a one-liner that blends intense humor and should be flirty and witty related to women". Create flirty one-liners that subtly hint at attraction and desire",
         ]
         return random.choice(options)
 
     else:
-        return "In less than 280 characters, write a tweet about overcoming challenges with a extreamly strong, motivational tone."
+        return "In less than 280 characters, write a tweet about overcoming challenges with an extreamly strong, motivational tone."
 
 # Function to generate tweet content using OpenAI's GPT
 def generate_tweet_from_openai(prompt: str) -> str:
