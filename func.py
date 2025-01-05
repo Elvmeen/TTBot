@@ -56,7 +56,7 @@ def generate_prompt() -> str:
         options = [
             "Act as a first person and Write a natural, and extreamly strong motivational tweet where I reflect on a moment I overcame self-doubt and how it transformed me(it should be unique).",
             "Create a unique tweet where I share extreamly emotionally captivating personal revelation about the importance of embracing failure as a stepping stone to success, in a very strong tone",
-            "Generate an inspiring tweet where I talk about my journey of breaking free from my comfort zone and the growth that followed",
+            "Generate an seriously inspiring tweet where I talk about my journey of breaking free from my comfort zone and the growth that followed",
             "If your code works on the first try, did you really learn anything?",
         ]
         return random.choice(options)
