@@ -64,8 +64,6 @@ def generate_prompt() -> str:
     elif category == 'humour':
         options = [
             "Write a short, very emotionally charged question that sparks deep reflection.",
-            "Craft a greeting that’s both humorous and strongly provocative",
-            "Create a one-liner that blends intense humor and should be flirty and witty related to women", 
             "Create flirty one-liners that subtly hint at attraction and desire",
         ]
         return random.choice(options)
