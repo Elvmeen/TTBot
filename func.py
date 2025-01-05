@@ -88,6 +88,10 @@ def generate_tweet_from_openai(prompt: str) -> str:
         # Extracting the text response from OpenAI
         tweet_content = completion.choices[0].message.content.strip()
 
+        # Remove quotes from the start and end of the tweet content if they exist
+        if tweet_content.startswith('"') and tweet_content.endswith('"'):
+            tweet_content = tweet_content[1:-1]
+
         return tweet_content
 
     except Exception as e:
