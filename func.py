@@ -39,37 +39,28 @@ import random
 # Function to create a random prompt for tweet generation
 def generate_prompt() -> str:
     # Categories for generating prompts
-    categories = ['tech', 'personal_dev', 'humour']
+    categories = ['tech', 'life_wisdom']
     category = random.choice(categories)
 
     if category == 'tech':
         options = [
             "Write a first-person tweet sharing a hard-earned lesson from a recent coding challenge.",
-            "Create a tweet discussing the importance of some subjecttive areas programming like quant finance or orther sectios in today's digital age.",
+            "Create a tweet discussing the importance of programming areas like quant finance or other sections in today's digital age.",
             "Share a tip for optimizing code performance that every developer should know.",
-            "Act as a first person and Write a tweet about the evolution of programming languages and how it’s changed the way we code.",
-            "Pose a radom question about the cybersecurity/programming that encourages engagement as a tweet."
+            "Write a tweet about the evolution of programming languages and how it’s changed the way we code.",
+            "Pose a random question about cybersecurity or programming that encourages engagement."
         ]
         return random.choice(options)
 
-    elif category == 'personal_dev':
+    elif category == 'life_wisdom':
         options = [
-            "Act as a first person and Write a natural, and extreamly strong motivational tweet where I reflect on a moment I overcame self-doubt and how it transformed me(it should be unique).",
-            "Create a unique tweet where I share extreamly emotionally captivating personal revelation about the importance of embracing failure as a stepping stone to success, in a very strong tone",
-            "Generate an seriously inspiring tweet where I talk about my journey of breaking free from my comfort zone and the growth that followed",
-            "If your code works on the first try, did you really learn anything?",
-        ]
-        return random.choice(options)
-
-    elif category == 'humour':
-        options = [
-            "Write a short, very emotionally charged question that sparks deep reflection(it should be unique)..",
-            "Create flirty one-liners that subtly hint at attraction and desire",
+            "Generate a single, engaging, first-person tweet that is punchy, candid, and thought-provoking. The tweet should share a hard-earned lesson, insight, or provocative question from the world of tech and programming. Cover topics such as coding challenges, the evolution of programming languages, cybersecurity, quant finance, or tips for optimizing code. The tone should be conversational and relatable, designed to spark reflection and engagement among tech enthusiasts, capturing both the humor and the seriousness of the tech journey"
         ]
         return random.choice(options)
 
     else:
-        return "In less than 280 characters, write a tweet about overcoming challenges with an extreamly strong, motivational tone(it should be unique and natural)."
+        return "In one powerful line, write a tweet that challenges the way we think about overcoming obstacles. Keep it sharp, unapologetic, and leave people questioning their own limits."
+
 
 # Function to generate tweet content using OpenAI's GPT
 def generate_tweet_from_openai(prompt: str) -> str:
