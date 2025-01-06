@@ -50,7 +50,7 @@ def generate_prompt() -> str:
 
     elif category == 'life_wisdom':
         options = [
-            "Generate a bold, provocative, and conversational tweet that tackles an everyday relationship dilemma, personal insecurity, or social observation with a sharp, candid tone. The tweet should be short, punchy, and designed to spark engagement, resembling a casual conversation or internal reflection about life and relationships. Provide only one response"
+            "Generate a bold, provocative, and conversational tweet that tackles an everyday relationship dilemma, personal insecurity, or social observation with a sharp, candid tone. The tweet should be short, punchy, and designed to spark engagement, resembling a casual conversation or internal reflection about life and relationships. Provide only one response, dont use hashtags"
         ]
         return random.choice(options)
 
