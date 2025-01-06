@@ -44,11 +44,7 @@ def generate_prompt() -> str:
 
     if category == 'tech':
         options = [
-            "Write a first-person tweet sharing a hard-earned lesson from a recent coding challenge.",
-            "Create a tweet discussing the importance of programming areas like quant finance or other sections in today's digital age.",
-            "Share a tip for optimizing code performance that every developer should know.",
-            "Write a tweet about the evolution of programming languages and how it’s changed the way we code.",
-            "Pose a random question about cybersecurity or programming that encourages engagement."
+            ""
         ]
         return random.choice(options)
 
