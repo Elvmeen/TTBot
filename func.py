@@ -44,18 +44,18 @@ def generate_prompt() -> str:
 
     if category == 'tech':
         options = [
-            "Generate a single, engaging, first-person tweet that is punchy, candid, and thought-provoking. The tweet should share a hard-earned lesson, insight, or provocative question from the world of tech and programming. Cover topics such as coding challenges, the evolution of programming languages, cybersecurity, quant finance, or tips for optimizing code. The tone should be conversational and relatable, designed to spark reflection and engagement among tech enthusiasts, capturing both the humor and the seriousness of the tech journey"
+            "Generate a single, engaging, first-person tweet that is punchy, candid, and thought-provoking. The tweet should share a hard-earned lesson, insight, or provocative question from the world of tech and programming. Cover topics such as coding challenges, the evolution of programming languages, cybersecurity, quant finance, or tips for optimizing code. The tone should be conversational and relatable, designed to spark reflection and engagement among tech enthusiasts, capturing both the humor and the seriousness of the tech journey, don't give output you've given before"
         ]
         return random.choice(options)
 
     elif category == 'life_wisdom':
         options = [
-            "Generate a bold, provocative, and conversational tweet that tackles an everyday relationship dilemma, personal insecurity, or social observation with a sharp, candid tone. The tweet should be short, punchy, and designed to spark engagement, resembling a casual conversation or internal reflection about life and relationships. Provide only one response, dont use hashtags"
+            "Generate a bold, provocative, and conversational tweet that tackles an everyday relationship dilemma, personal insecurity, or social observation with a sharp, candid tone. The tweet should be short, punchy, and designed to spark engagement, resembling a casual conversation or internal reflection about life and relationships. Provide only one response, dont use hashtags and don't give answers you've given before"
         ]
         return random.choice(options)
 
     else:
-        return "In one powerful line, write a tweet that challenges the way we think about overcoming obstacles. Keep it sharp, unapologetic, and leave people questioning their own limits."
+        return "In one powerful line, write a tweet that challenges the way we think about overcoming obstacles. Keep it sharp, unapologetic, and leave people questioning their own limits, don't give answers you've given before."
 
 
 # Function to generate tweet content using OpenAI's GPT
